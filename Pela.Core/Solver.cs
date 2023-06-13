@@ -16,7 +16,12 @@
             var assistants = _assistants.ToList();
             var solutionMap = new Dictionary<string, Solution>();
 
-            foreach (var area in _areas.OrderByDescending(area => area.Value))
+            var areas =
+                _areas
+                    .OrderByDescending(area => area.Priority)
+                    .ThenByDescending(area => area.Value);
+
+            foreach (var area in areas)
             {
                 var finder = new SolutionFinder(area, assistants);
                 var solution = finder.FindMostOptimalSolution();

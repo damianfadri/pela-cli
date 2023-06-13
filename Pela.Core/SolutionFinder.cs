@@ -20,12 +20,6 @@
 
             SolveUtil(new Solution(_area), 0);
 
-            var ordered =
-                _solutions
-                .OrderByDescending(solution => solution.IsSolved)
-                .ThenBy(solution => solution.Waste)
-                .ToList();
-
             return _solutions
                 .OrderByDescending(solution => solution.IsSolved)
                 .ThenBy(solution => solution.Waste)

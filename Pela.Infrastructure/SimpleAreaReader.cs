@@ -11,15 +11,20 @@ namespace Pela.Infrastructure
                 var parts = line.Split(',');
 
                 var name = parts[0];
+
                 var tourDuration = int.Parse(parts[1]);
                 var educationalValue = int.Parse(parts[2]);
                 var visitorAppeal = int.Parse(parts[3]);
+                var priority = int.Parse(parts[4]);
 
-                yield return new Area(
+                var area = new Area(
                     name,
                     tourDuration,
                     educationalValue,
-                    visitorAppeal);
+                    visitorAppeal,
+                    priority);
+
+                yield return area;
             }
         }
     }
