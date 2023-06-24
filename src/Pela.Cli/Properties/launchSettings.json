@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Pela.Cli": {
-      "commandName": "Project",
-      "commandLineArgs": "--areas Resources/areas.txt --assistants Resources/assistants.txt"
-    }
-  }
-}
