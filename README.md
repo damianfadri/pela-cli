@@ -39,6 +39,7 @@ To calculate the value needed to reach quota:
 2. **Subtract the quota value to the current value**
 
 Take this particular state for example:
+
 ![example-area](media/example-area.png)
 
 For Tour Duration, quota value is 351 and current value is 200. Therefore, the value needed to reach quota is **351 - 200 = 151**.
