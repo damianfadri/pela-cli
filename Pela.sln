@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Core", "Pela.Core\Pela.Core.csproj", "{B897E2FC-D9F3-472B-B915-BD83DB4BD918}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Core", "src\Pela.Core\Pela.Core.csproj", "{B897E2FC-D9F3-472B-B915-BD83DB4BD918}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Cli", "Pela.Cli\Pela.Cli.csproj", "{23D4443F-8284-4489-87B6-6D4AF5E35D37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Cli", "src\Pela.Cli\Pela.Cli.csproj", "{23D4443F-8284-4489-87B6-6D4AF5E35D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Infrastructure", "Pela.Infrastructure\Pela.Infrastructure.csproj", "{5A97E499-537C-409D-817F-8D777768B07B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pela.Infrastructure", "src\Pela.Infrastructure\Pela.Infrastructure.csproj", "{5A97E499-537C-409D-817F-8D777768B07B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
