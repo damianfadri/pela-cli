@@ -14,7 +14,7 @@
             _solutions = new List<Solution>();
         }
 
-        public Solution FindMostOptimalSolution()
+        public Solution FindSolution()
         {
             _solutions = new List<Solution>();
 
