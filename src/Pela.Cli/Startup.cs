@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Pela.Core;
-using System.Text;
 
 namespace Pela.Cli
 {
@@ -28,71 +26,44 @@ namespace Pela.Cli
         protected override async Task ExecuteAsync(
             CancellationToken stoppingToken)
         {
-            await Task.CompletedTask;
-
-            if (string.IsNullOrWhiteSpace(_options.AreaFile))
+            if (!File.Exists(_options.AreaFile))
             {
                 throw new InvalidOperationException(
                     $"Area file does not exist. Path: '{_options.AreaFile}'");
             }
 
-            if (string.IsNullOrWhiteSpace(_options.AssistantFile))
+            if (!File.Exists(_options.AssistantFile))
             {
                 throw new InvalidOperationException(
                     $"Assistant file does not exist. Path: '{_options.AssistantFile}'");
             }
 
             var areas = 
-                _areaReader
+                await _areaReader
                     .ReadAsync(_options.AreaFile)
-                    .ToBlockingEnumerable();
+                    .ToListAsync();
 
             var assistants =
-                _assistantReader
+                await _assistantReader
                     .ReadAsync(_options.AssistantFile)
-                    .ToBlockingEnumerable();
+                    .ToListAsync();
 
-            var solutions = new Solver(areas, assistants).Solve();
-
-            foreach (var solution in solutions)
+            foreach (var area in areas
+                .OrderByDescending(area => area.Priority)
+                .ThenByDescending(area => area.Value))
             {
-                LogSolution(solution);
+                var finder = new SolutionFinder(area, assistants);
+                var solution = finder.FindSolution();
+
+                foreach (var assistant in solution.Assistants)
+                {
+                    assistants.Remove(assistant);
+                }
+
+                Console.WriteLine(solution);
             }
 
             _lifetime.StopApplication();
-        }
-
-        private void LogSolution(Solution solution)
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(solution.Area.Name);
-            foreach (var assistant in solution.Assistants)
-            {
-                sb.AppendLine($"  {assistant.Name}");
-            }
-            
-            if (!solution.IsSolved)
-            {
-                sb.AppendLine();
-                sb.AppendLine("  Modifications:");
-                if (solution.TourDuration < solution.Area.TourDuration)
-                {
-                    sb.AppendLine($"    Tour Duration: +{solution.Area.TourDuration - solution.TourDuration}");
-                }
-
-                if (solution.EducationalValue < solution.Area.EducationalValue)
-                {
-                    sb.AppendLine($"    Educational Value: +{solution.Area.EducationalValue - solution.EducationalValue}");
-                }
-
-                if (solution.VisitorAppeal < solution.Area.VisitorAppeal)
-                {
-                    sb.AppendLine($"    Visitor Appeal: +{solution.Area.VisitorAppeal - solution.VisitorAppeal}");
-                }
-            }
-
-            Console.WriteLine(sb);
         }
     }
 }

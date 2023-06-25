@@ -1,4 +1,6 @@
-﻿namespace Pela.Core
+﻿using System.Text;
+
+namespace Pela.Core
 {
     public class Solution
     {
@@ -53,6 +55,39 @@
             return new Solution(
                 Area.Clone(),
                 assistants);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(Area.Name);
+            foreach (var assistant in Assistants)
+            {
+                sb.AppendLine($"  {assistant.Name}");
+            }
+
+            if (!IsSolved)
+            {
+                sb.AppendLine();
+                sb.AppendLine("  Modifications:");
+                if (TourDuration < Area.TourDuration)
+                {
+                    sb.AppendLine($"    Tour Duration: +{Area.TourDuration - TourDuration}");
+                }
+
+                if (EducationalValue < Area.EducationalValue)
+                {
+                    sb.AppendLine($"    Educational Value: +{Area.EducationalValue - EducationalValue}");
+                }
+
+                if (VisitorAppeal < Area.VisitorAppeal)
+                {
+                    sb.AppendLine($"    Visitor Appeal: +{Area.VisitorAppeal - VisitorAppeal}");
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

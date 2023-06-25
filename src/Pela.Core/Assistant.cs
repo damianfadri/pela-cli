@@ -6,8 +6,6 @@
         public int TourDuration { get; }
         public int EducationalValue { get; }
         public int VisitorAppeal { get; }
-        public object Value =>
-            TourDuration + EducationalValue + VisitorAppeal;
 
         public Assistant(
             string name,
